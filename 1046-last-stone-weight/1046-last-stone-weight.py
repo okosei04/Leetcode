@@ -1,6 +1,6 @@
 class Solution:
     def lastStoneWeight(self, stones: List[int]) -> int:
-        stones = list(map(lambda stone: -stone, stones))
+        stones = [-stone for stone in stones]
         heapq.heapify(stones)
         
         
