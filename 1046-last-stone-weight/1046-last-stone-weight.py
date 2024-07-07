@@ -1,18 +1,15 @@
 class Solution:
     def lastStoneWeight(self, stones: List[int]) -> int:
-        stones = list(map(lambda x: -x, stones))
-        heapify(stones)
-
-        a = heappop(stones)
-        while stones:
-            b = heappop(stones)
-            d = -abs(a - b)
-            if d != 0:
-                heappush(stones, d)
-            a = 0 if not stones else heappop(stones)
+        stones = list(map(lambda stone: -stone, stones))
+        heapq.heapify(stones)
         
-        return -a
-
+        
+        while len(stones) > 1:
+            first = heapq.heappop(stones)
+            second = heapq.heappop(stones)
             
-
-        return 0 if not stones else stones[0]         
+            if first != second:
+                heapq.heappush(stones, first-second)
+        
+        return 0 if not stones else -stones[0]
+        
