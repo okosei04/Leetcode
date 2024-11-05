@@ -11,24 +11,15 @@ class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         res = []
 
-        def bactrack(curr_str, open_brac, close_brac):
-            if len(curr_str) == 2 * n:
-                res.append(curr_str)
-                
-
-            if open_brac < n:
-                bactrack(curr_str + "(", open_brac + 1, close_brac)
-
-            if close_brac < open_brac:
-                bactrack(curr_str + ")", open_brac, close_brac + 1)
-
-        bactrack("", 0, 0)
-
-        return res
-
+        def back(currStr, openB, closeB):
+            if len(currStr) == 2 * n:
+                res.append(currStr)
             
-
-
-
-
+            if openB < n:
+                back(currStr + "(", openB + 1, closeB)
+            
+            if closeB < openB:
+                back(currStr + ")", openB, closeB + 1)
         
+        back("", 0, 0)
+        return res
